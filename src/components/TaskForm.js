@@ -1,13 +1,13 @@
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { TaskContext } from '../context/TaskContext';
 
-function TaskForm({ createTask }) {
+function TaskForm() {
   /*Se inicializan dos propiedades string mediante el useState, una para el
 	título y otro para la descripción */
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const valor = useContext(TaskContext);
-  console.log(valor);
+  const { createTask } = useContext(TaskContext);
+
   /*Función de onSubmit, donde evitamos el default del botón y además llamamos 
 	a la función createTask, pasandole como parametro el title y description 
 	creados en el useState*/

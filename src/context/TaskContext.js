@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import { tasks as data } from '../data/tasks';
 //Nombre del contexto
 export const TaskContext = createContext();
 //Componente que englobara todo
@@ -8,7 +9,7 @@ export function TaskContextProvider(props) {
 	dentro de la función encontramos el método setTasks, donde se le hace una copia
 	con el spreed operator, siendo los datos a agregar el titulo de la tarea, 
 	id y una descripción*/
-  function createTasks(task) {
+  function createTask(task) {
     setTasks([
       ...tasks,
       {
@@ -18,9 +19,17 @@ export function TaskContextProvider(props) {
       },
     ]);
   }
+  useEffect(() => {
+    setTasks(data);
+  });
+
   function deleteTask(taskId) {
     setTasks(tasks.filter((task) => task.id !== taskId));
   }
   //Se crea el componente
-  return <TaskContext.Provider>{props.children}</TaskContext.Provider>;
+  return (
+    <TaskContext.Provider value={{ tasks, deleteTask, createTask }}>
+      {props.children}
+    </TaskContext.Provider>
+  );
 }

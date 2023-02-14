@@ -1,5 +1,8 @@
 import TaskCard from './TaskCard';
-function TaskList({ tasks, deleteTask }) {
+import React, { useContext } from 'react';
+import { TaskContext } from '../context/TaskContext';
+function TaskList() {
+  const { tasks } = useContext(TaskContext);
   /*Con el props pasado por argumento en este caso es tasks
 	comprobamos si su tamaño o sea si no existen tareas, 
 	retornara el H1 con el mensaje correspondiente */
@@ -14,7 +17,7 @@ function TaskList({ tasks, deleteTask }) {
   return (
     <div>
       {tasks.map((task) => (
-        <TaskCard key={task.id} task={task} deleteTask={deleteTask} />
+        <TaskCard key={task.id} task={task} />
       ))}
     </div>
   );
